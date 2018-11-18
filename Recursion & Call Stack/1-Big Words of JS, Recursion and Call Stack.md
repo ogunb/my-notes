@@ -41,7 +41,9 @@ When you invoke the greeting function, It will be pushed to a stack behind the s
 
 Then this greeting function is going to run through and hit another function, and it’s going to call that function, which will be put on to the stack.
 
-> [ sayHi ][ greeting ]
+> [ sayHi ]
+>
+> [ greeting ]
 
 For greeting to resolve and return something, it first has the wait for the sayHi function to resolve. So Call Stack has the golden rule of “First in, Last out”, like any other stack. Basically, it means when there are no more function calls, it’s going to start to resolve them at the top of the stack, meaning, the last one. Hopefully, I draw a picture of Call Stack in your mind. If not, I’ll leave links to great resources at the end of this topic.
 
@@ -59,19 +61,28 @@ If the given number is less then 2, the function will immediately return 1. Else
 This might seem confusing at first, so let’s go through our call stack with factorial(5).
 
 > [ factorial(5) ] → Calls “factorial(4)”
+>
 > [ factorial(4) ] → Calls “factorial(3)”
+>
 > [ factorial(3) ] → Calls “factorial(2)”
+>
 > [ factorial(2) ] → Calls “factorial(1)”
+>
 > [ factorial(1) ] → Returns “1”
 
 ---
 
 > [ factorial(1) ] → Fifth Call: Since it’s less than 2, it resolves itself and pops out of the stack, returning 1.
+>
 > [ factorial(2) ] → Forth Call: With the resolved “factorial(num — 1)” call, now the “num _ factorial(num — 1)” operation is equal to “2 _ 1”, thus resolving and returning 2.
+>
 > [ factorial(3) ] → Third Call: Same thing with this too, “num _ factorial(num — 1)” : “3 _ 2 = 6”
-> [ factorial(4) ] → Second Call => 4 _ 6 = 24
-> [ factorial(5) ] → First Call will yield the result of 5 _ 24, which is 120.
-> (see live here: [https://codepen.io/ogunb/pen/jQbGrv](CodePen/ogunb))
+>
+> [ factorial(4) ] → Second Call => 4 \_ 6 = 24
+>
+> [ factorial(5) ] → First Call will yield the result of 5 \_ 24, which is 120.
+>
+> _see live here: [https://codepen.io/ogunb/pen/jQbGrv](CodePen/ogunb))_
 
 > **TAKEAWAY: Recursions depend on the return statements. You should return something from the functions, otherwise, it’s pointless.**
 
